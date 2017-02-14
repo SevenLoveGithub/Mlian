@@ -1,0 +1,46 @@
+#coding=utf-8
+'''
+仅分配一个WebView对象，对个start_urls时依次加载，Scrapy的并发性或许也让WebView对象具有并发性（但3次内存地址都是一致的）
+'''
+
+from scrapy.selector import Selector
+from scrapy.spider import BaseSpider
+from scrapy.http import HtmlResponse
+from scrapy import Item, Field 
+import gtk
+import webkit
+import jswebkit 
+
+class TestItem(Item):
+    title = Field()
+
+class Webkit(object):
+    def htmlResponse (self, html, baseurl): 
+        webview = webkit.WebView () 
+        webview.connect ('load-finished', lambda v, f: gtk.main_quit ()) 
+        webview.load_html_string(html, baseurl) #加载1次
+        #webview.load_uri(baseurl) #加载2次
+        #webview.load_string(html, "text/html", "utf-8", baseurl) #加载1次（与load_html_string类似）
+        gtk.main () 
+        js=jswebkit.JSContext (webview.get_main_frame ().get_global_context ()) 
+        renderedBody = str (js.EvaluateScript ('document.body.innerHTML')) 
+        return HtmlResponse (baseurl, body = renderedBody)
+
+class WebkitSpider(BaseSpider):
+    name = u'XPath'
+    start_urls = [u'http://127.0.0.1/js12.html',u'http://127.0.0.1/js11.html',u'http://127.0.0.1/js10.html']
+    webkit=None
+    def __init__(self):
+        self.webkit=Webkit()
+
+    def parse(self, response):
+        url = response.url
+        html=response.body
+        r=self.webkit.htmlResponse(html, url)
+        print self.webkit
+        sel=Selector(r)
+        item=TestItem()
+
+        xpath = u"/html/body/p/text()"
+        item[u'title']=sel.xpath(xpath).extract()
+        return item
