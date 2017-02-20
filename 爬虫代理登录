@@ -1,0 +1,29 @@
+import urllib2
+import sys
+
+reload(sys)
+sys.setdefaultencoding('utf8')
+
+# The proxy address and port:
+proxy_info = { 'host' : 'proxy. .com',
+               'port' : ,
+                'user' : '',
+               'pass' : ''
+             }
+
+
+proxy_support = urllib2.ProxyHandler({"http" : "http://%(user)s:%(pass)s@%(host)s:%(port)d" % proxy_info})
+
+
+opener = urllib2.build_opener(proxy_support)
+
+
+urllib2.install_opener(opener)
+url = 'http://www.huawei.com/'
+req = urllib2.Request(url,headers = {"User-Agent":"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.152 Safari/537.36"})
+
+
+response = urllib2.urlopen(req)
+
+
+print response.read(）
