@@ -1,0 +1,62 @@
+参考自http://itnihao.blog.51cto.com/1741976/1733245
+
+curl "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=wx59eabc6c24040e50&corpsecret=77JhihUsYtlLqL4yIsA8cLgUbAEFr0rZNfUs92Hbk_sZHYMUETZY16ndPmmRMWbm"
+{"access_token":"-p5UTSVXvChXEPzOaoPukfvJvD9msjv-hcL5dPp3SjuHwccYGsHk7LSHFAAYY_LP","expires_in":7200}
+
+
+curl https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=cySA795caUlkhTd1opK2XzU9Xq23Da_nZOODMUDKjPuwzN_2khhUflte7k75MnFs -d  "{ \
+   \"touser\": \"qhf\", \
+   \"msgtype\": \"text\", \
+   \"agentid\": 1, \
+   \"text\": { \
+       \"content\": \"Hello,I’m yanglu\" \
+   }, \
+   \"safe\":\"0\" \
+}"
+
+
+
+
+https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=wx59eabc6c24040e50&corpsecret=3Xl9whvarSuWt0R5eZgx-xQgqvA6Aes9H3P6Q0jfZcLZeIs9pFsf10rAsSf5Qznv
+
+
+token=cySA795caUlkhTd1opK2XzU9Xq23Da_nZOODMUDKjPuwzN_2khhUflte7k75MnFs
+
+
+curl https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=cySA795caUlkhTd1opK2XzU9Xq23Da_nZOODMUDKjPuwzN_2khhUflte7k75MnFs -d  "{ \
+   \"touser\": \"qhf\", \
+   \"msgtype\": \"text\", \
+   \"agentid\": 1, \
+   \"text\": { \
+       \"content\": \"Hello,I’m yanglu\" \
+       
+   }, \
+   \"safe\":\"0\" \
+}"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+url = "https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=cySA795caUlkhTd1opK2XzU9Xq23Da_nZOODMUDKjPuwzN_2khhUflte7k75MnFs"
+data = { 
+   "touser": "qhf", 
+   "msgtype": "text", 
+   "agentid": 1, 
+   "text": { 
+       "content": "hello ,qhf" 
+   }, 
+   "safe":"0" 
+}
+r = requests.post(url,json=data)
+print r.status_code
+print r.content
