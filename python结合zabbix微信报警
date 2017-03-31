@@ -25,3 +25,39 @@ print r.status_code
 print r.content
   ##打印返回内容
   
+  
+  
+  
+  
+  python脚本：
+  #!/usr/bin/bash
+  #coding :utf-8
+  import urllib,urllib2
+  import json
+  import sys
+  def GetToken(corpid,corpsecret):
+    gettoken_url = 'https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=' + corpid + '&corpsecret=' + corpsecret
+    try:
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
