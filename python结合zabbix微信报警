@@ -10,7 +10,7 @@ import reuquests
 url = "https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=cySA795caUlkhTd1opK2XzU9Xq23Da_nZOODMUDKjPuwzN_2khhUflte7k75MnFs"
   ##凭token凭证调用接口
 data = { 
-   "touser": "qhf", 
+   "touser": "qhf",                  touser：后面的名字填通讯录联系人的名字，且有管理这个应用的权限！否则会报错80041
    "msgtype": "text", 
    "agentid": 1, 
    "text": { 
